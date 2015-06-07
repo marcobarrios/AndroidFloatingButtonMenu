@@ -10,19 +10,14 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 public class MainActivity extends Activity {
 
+    FloatingActionsMenu menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final FloatingActionsMenu menu = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
-        menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
+        menu = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
         final FloatingActionButton actionA = (FloatingActionButton) findViewById(R.id.action_a);
         actionA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,5 +42,14 @@ public class MainActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Segunda Accion", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(menu.isExpanded()){
+            menu.collapse();
+        } else {
+            this.finish();
+        }
     }
 }
